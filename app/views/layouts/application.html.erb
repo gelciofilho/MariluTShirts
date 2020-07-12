@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>MariluTShirts</title>
+    <title>Marilu T-Shirts</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -9,7 +9,23 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <%= yield %>
-  </body>
+  <body class='<%= controller.controller_name %>'>
+    <div id="banner">
+      <%= image_tag 'logo.png', alt: 'Marilu T-Shirts' %>
+      <span class="title"><%= @page_title %></span>
+    </div>
+    <div id="columns">
+    <div id="side">
+      <ul>
+        <li><a href="http://www....">Home</a></li>
+        <li><a href="http://www..../faq">Questions</a></li>
+        <li><a href="http://www..../news">News</a></li>
+        <li><a href="http://www..../contact">Contact</a></li>
+      </ul>
+    </div>
+    <div id="main">
+      <%= yield %>
+    </div>
+  </div>
+</body>
 </html>
