@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Place Orders</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Address</th>
+      <th>Email</th>
+      <th>Pay type</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @place_orders.each do |place_order| %>
+      <tr>
+        <td><%= place_order.name %></td>
+        <td><%= place_order.address %></td>
+        <td><%= place_order.email %></td>
+        <td><%= place_order.pay_type %></td>
+        <td><%= link_to 'Show', place_order %></td>
+        <td><%= link_to 'Edit', edit_place_order_path(place_order) %></td>
+        <td><%= link_to 'Destroy', place_order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Place Order', new_place_order_path %>

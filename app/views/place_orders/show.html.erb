@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @place_order.name %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @place_order.address %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @place_order.email %>
+</p>
+
+<p>
+  <strong>Pay type:</strong>
+  <%= @place_order.pay_type %>
+</p>
+
+<%= link_to 'Edit', edit_place_order_path(@place_order) %> |
+<%= link_to 'Back', place_orders_path %>

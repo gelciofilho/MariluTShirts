@@ -1,0 +1,9 @@
+<h1>Place a new order</h1>
+
+<div class="place_order_form">
+    <fieldset>
+        <legend>Please Enter Your Details</legend>
+        <%= render 'form', place_order: @place_order %>
+    </fieldset>
+</div>
+<%= link_to 'Back', place_orders_path %>
