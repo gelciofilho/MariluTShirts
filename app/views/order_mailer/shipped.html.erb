@@ -1,0 +1,10 @@
+
+<h3>Marilu T-Shirts - Order Shipped</h3>
+<p><%= @greeting %><%= @place_order.name %></p>
+<p>
+This e-mail is to confirm that your parcel in on the way and it will be delivered soon. 
+</p>
+<table>
+<tr><th colspan="2">Qty</th><th>Description</th></tr>
+<%= render @place_order.line_items -%>
+</table>

@@ -35,6 +35,7 @@ class PlaceOrdersController < ApplicationController
       if @place_order.save
         Cart.destroy(session[:cart_id])
         session[:cart_id] = nil
+        OrderMailer.received(@place_order).deliver_later
         format.html { redirect_to index_url, notice: 'Thank you for choosing us. Your order has been placed.' }
         format.json { render :show, status: :created, location: @place_order }
       else
