@@ -1,6 +1,8 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
-
+  before_action :require_user
+  before_action :require_admin
+    
   # GET /products
   # GET /products.json
   def index
@@ -44,6 +46,11 @@ class ProductsController < ApplicationController
       if @product.update(product_params)
         format.html { redirect_to @product, notice: 'Product was successfully updated.' }
         format.json { render :show, status: :ok, location: @product }
+
+        @products = Product.all.order(:title)
+        ActionCable.server.broadcast 'products',
+          html: render_to_string('store/index', layout: false)
+          
       else
         format.html { render :edit }
         format.json { render json: @product.errors, status: :unprocessable_entity }
@@ -76,13 +83,18 @@ class ProductsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_product
       @product = Product.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def product_params
       params.require(:product).permit(:title, :description, :image_url, :price)
+    end
+
+    def require_admin
+      if !current_user.admin?
+          flash[:alert] = "You do not have privilege needed to perfom this action. Please verify your permissions with the administrator"
+          redirect_to index_path
+      end
     end
 end

@@ -1,24 +1,39 @@
-<p id="notice"><%= notice %></p>
+<div class="container mt-4 mb-4 bg-transparent border border-info">
+  <div class="row justify-content-center">
+    <div class="col-12 mt-4 mb-1">
+      
+        <h1 class="text-center text-info"> Order No. #<%= @place_order.id %> </h1>
 
-<p>
-  <strong>Name:</strong>
-  <%= @place_order.name %>
-</p>
+      <p>
+        <strong><span class="text-info">Username:</span></strong>
+        <%= @place_order.user.username if @place_order.user %>
+      </p>
 
-<p>
-  <strong>Address:</strong>
-  <%= @place_order.address %>
-</p>
+      <p>
+        <strong><span class="text-info">Name:</span></strong>
+        <%= @place_order.name %>
+      </p>
 
-<p>
-  <strong>Email:</strong>
-  <%= @place_order.email %>
-</p>
+      <p>
+        <strong><span class="text-info">Address:</span></strong>
+        <%= @place_order.address %>
+      </p>
 
-<p>
-  <strong>Pay type:</strong>
-  <%= @place_order.pay_type %>
-</p>
+      <p>
+        <strong><span class="text-info">Email:</span></strong>
+        <%= @place_order.email %>
+      </p>
 
-<%= link_to 'Edit', edit_place_order_path(@place_order) %> |
-<%= link_to 'Back', place_orders_path %>
+      <p>
+        <strong><span class="text-info">Pay type:</span></strong>
+        <%= @place_order.pay_type %>
+      </p>
+
+      <%= link_to 'Edit', edit_place_order_path(@place_order) %> |
+      <%= link_to 'Back', place_orders_path %>
+
+      <br/>
+
+    </div>
+  </div>
+</div> 

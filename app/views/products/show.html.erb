@@ -1,24 +1,20 @@
-<p id="notice"><%= notice %></p>
+<div class="container mt-4 mb-4 bg-transparent border border-info">
+  <div class="row justify-content-center">
+    <div class="col-12 mt-4 mb-1">
+      <div class="media">
+        <%= image_tag(@product.image_url, class: "align-self-center mr-3", size: 200) %>
+        <div class="media-body">
+          <h5 class="mt-0"><strong><%= @product.title %></strong></h5>
+          <p><%= @product.description %></p>
+          <p class="price_show"><strong><%= number_to_currency(@product.price, :unit => "€", :separator => ".", :delimiter => ",") %></strong></p>
+        </div>
+      </div>
 
-<p>
-  <strong>Title:</strong>
-  <%= @product.title %>
-</p>
+      <%= link_to 'Edit', edit_product_path(@product) %> |
+      <%= link_to 'Back', products_path %>
 
-<p>
-  <strong>Description:</strong>
-  <%= @product.description %>
-</p>
+      <br/>
 
-<p>
-  <strong>Image url:</strong>
-  <%= @product.image_url %>
-</p>
-
-<p>
-  <strong>Price:</strong>
-  <%= @product.price %>
-</p>
-
-<%= link_to 'Edit', edit_product_path(@product) %> |
-<%= link_to 'Back', products_path %>
+    </div>
+  </div>
+</div> 

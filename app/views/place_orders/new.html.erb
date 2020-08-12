@@ -1,9 +1,13 @@
-<h1>Place a new order</h1>
-
-<div class="place_order_form">
-    <fieldset>
-        <legend>Please Enter Your Details</legend>
-        <%= render 'form', place_order: @place_order %>
-    </fieldset>
+<div class="container mt-4 mb-4 bg-white border border-info ">
+  <div class="row justify-content-center">
+        <div class="col-12 mt-4 mb-1">
+            <h1 class="text-center text-info"> Checkout </h1>
+            <div class="place_order_form">
+              <fieldset>
+                  <%= render 'form', place_order: @place_order %>
+              </fieldset>
+            </div>
+        <%= link_to 'Back', place_orders_path %>
+    </div>
+  </div>
 </div>
-<%= link_to 'Back', place_orders_path %>

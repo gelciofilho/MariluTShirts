@@ -1,6 +1,12 @@
-<h1>Editing Place Order</h1>
+<div class="container mt-4 mb-4 bg-white border border-info ">
+  <div class="row justify-content-center">
+        <div class="col-12 mt-4 mb-1">
+            <h1 class="text-center text-info"> Editing Order No. #<%= @place_order.id %> </h1>
 
-<%= render 'form', place_order: @place_order %>
+            <%= render 'form', place_order: @place_order %>
 
-<%= link_to 'Show', @place_order %> |
-<%= link_to 'Back', place_orders_path %>
+            <%= link_to 'Show', @place_order %> |
+            <%= link_to 'Back', place_orders_path %>
+        </div>
+    </div>
+</div>

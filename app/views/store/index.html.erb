@@ -1,21 +1,29 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+    <h1 class="text-center text-info mt-4 mb-4">Marilu's Catalogue</h1>
 
-<h1>Marilu's Catalog</h1>
-
-<% cache @products do %>
-    <% @products.each do |product| %>
-        <% cache product do %>
-            <div class="entry">
-                <%= image_tag(product.image_url, size:90) %>
-                <h3><%= product.title %></h3>
-                <p>
-                    <%= sanitize(product.description) %>
-                </p>
-                <div class="price_line">
-                    <span class="price"><%= number_to_currency(product.price, :unit => "€", :separator => ".", :delimiter => ",") %></span>
-                    <%= button_to 'Add to Cart', line_items_path(product_id: product) %>
-                </div>
-            </div>
+    <% cache @products do %>
+        <% @products.each do |product| %>
+            <% cache product do %>   
+                    <div class="product-row">       
+                        <div class="product-column col-md-4">
+                            <div class="card mb-4 box-shadow border border-info" style="max-width: 18rem; height:25rem">
+                                <%= image_tag(product.image_url, class: 'img-fluid img-thumbnail rounded mx-auto d-block') %>
+                                <h5 class="ml-3 mr-3 text-justify"><%= product.title %></h5>
+                                <div class="card-body">
+                                    <p class="card-text"><%= sanitize(product.description) %></p>
+                                    <div class="d-flex justify-content-between align-items-left">
+                                        <div class="btn-group">
+                                            <%= button_to 'Add to Cart', line_items_path(product_id: product) %>
+                                        </div>
+                                        <div class="price_line">
+                                            <span class="price"><%= number_to_currency(product.price, :unit => "€", :separator => ".", :delimiter => ",") %></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            <% end %>
         <% end %>
     <% end %>
-<% end %>
+</div>

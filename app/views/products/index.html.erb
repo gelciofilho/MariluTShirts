@@ -1,28 +1,34 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Products</h1>
-
-<table>
-  <% @products.each do |product| %>
-    <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
-      <td>
-        <%= image_tag(product.image_url, class: 'list_image', size:200) %>
-      </td>
-      <td class="list_description">
-        <dl>
-          <dt><%= product.title %></dt>
-          <dd><%= truncate(strip_tags(product.description),
-          length: 80) %></dd>
-        </dl>
-      </td>
-      <td class="list_actions">
-        <%= link_to 'Show', product %><br/>
-        <%= link_to 'Edit', edit_product_path(product) %><br/>
-        <%= link_to 'Destroy', product, method: :delete,
-        data: { confirm: 'Are you sure?' } %>
-      </td>
-    </tr>
-  <% end %>
-</table>
-<br />
-<%= link_to 'New product', new_product_path %>
+<div class="container mt-4 mb-4 bg-transparent border border-info">
+  <div class="row justify-content-center">
+    <div class="col-12 mt-4 mb-1">
+      <h1 class="text-center text-info"> Manage Products </h1>
+      <p>
+        <%= link_to " + Add new product", new_product_path, class: "add_product btn btn-outline-info mt-3 position-static" %>
+      </p>
+      <p class="text-left ml-1 pt-3">You have <b><%= pluralize(@products.count, "product") %></b> in stock.</p>
+      <small class="form-text text-muted mb-5 ml-1">Date/Time: <%= Date.today.strftime("%d/%m/%Y") %> <%= Time.now.strftime("%H:%M:%S") %></small>
+      <div class="table-responsive">
+        <table class = "table table-hover">
+            <tbody>
+              <% @products.each do |product| %>
+                <tr scope="row">
+                  <td><%= image_tag(product.image_url, class: 'list_image', size:80) %></td>
+                  <td class="align-middle">
+                      <b><%= product.title %></b><br/>
+                      <%= truncate(strip_tags(product.description),
+                          length: 80) %><br/>
+                  </td>
+                  <td class="align-middle"><%= number_to_currency(product.price, :unit => "€", :separator => ".", :delimiter => ",") %><td>
+                  <td class="align-middle">
+                    <%= link_to 'Show', product %><br/>
+                    <%= link_to 'Edit', edit_product_path(product) %><br/>
+                    <%= link_to 'Delete', product, method: :delete,
+                        data: { confirm: 'Are you sure?' } %>
+                  </td>
+                </tr>
+        <% end %>
+      </table>
+      <br />
+    </div>
+  </div>
+</div>

@@ -1,38 +1,39 @@
-<%= form_with(model: place_order, local: true) do |form| %>
-  <% if place_order.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(place_order.errors.count, "error") %> prohibited this place_order from being saved:</h2>
+      <%= form_with(model: place_order, class: "shadow p-3 mb-3 bg-white rounded", local: true) do |form| %>
+        <% if place_order.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(place_order.errors.count, "error") %> prohibited this place_order from being saved:</h2>
 
-      <ul>
-        <% place_order.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
+            <ul>
+              <% place_order.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
         <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name, size: 40 %>
-  </div>
+        <legend class="text-justify text-info mt-5 ml-3">Please Enter Your Details</legend>
+        <div class="field col-md-4 mb-3 mt-4 text-info">
+          <fieldset disabled>
+            <label for="validationCustomUsername">Username</label>
+            <input type="text" id="disabledTextInput" class="form-control", placeholder= <%= current_user.username %>>
+          </fieldset> 
+        
+          <%= form.label :name, class:'mt-3' %>
+          <%= form.text_field :name, size: 40 %>
+        
+          <%= form.label :address, class:'mt-3' %>
+          <%= form.text_area :address, rows: 3, cols: 41 %>
+        
+          <%= form.label :email, class:'mt-3' %>
+          <%= form.email_field :email, size: 40 %>
+        
+          <%= form.label :pay_type, class:'mt-3' %>
+          <%= form.select :pay_type, PlaceOrder.pay_types.keys,
+                        prompt: 'Select a payment method' %>
+        
 
-  <div class="field">
-    <%= form.label :address %>
-    <%= form.text_area :address, rows: 3, cols: 40 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :email %>
-    <%= form.email_field :email, size: 40 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :pay_type %>
-    <%= form.select :pay_type, PlaceOrder.pay_types.keys,
-                  prompt: 'Select a payment method' %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit 'Place Order' %>
-  </div>
-<% end %>
+          <div class="actions mt-5">
+            <%= form.submit 'Place Order' %>
+          </div>
+        </div>
+      <% end %>

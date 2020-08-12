@@ -1,9 +1,31 @@
-<table>
-    <%= render(cart.line_items) %>
-        <tr class="total_line">
-            <td colspan="2">Total</td>
-            <td class="total_cell"><%= number_to_currency(cart.total_price) %></td>
-        </tr>
-</table>
-<%= button_to 'Empty cart', cart, method: :delete,
-data: { confirm: 'Are you sure?' } %> <%= button_to 'Checkout', new_place_order_path, method: :get %>
+<div class="container bg-transparent mb-0">
+  <div class="row justify-content-center">
+    <div class="col-12">    
+      <p class="text-center"><%= image_tag("cart_icon.png", class: 'cart text-center', size:60) %><p>
+      <div class="table-responsive">
+        <table class = "table table-hover">
+          <thead>
+            <tr class="text-info strong">
+              <th scope="col" class="text-center"><small><strong>Qty</strong></small></th>
+              <th scope="col"><small><strong>Product</strong></small></th>
+              <th scope="col" class="text-center"><small><strong>Price</strong></small></th>
+            </tr>
+          </thead>
+
+          <%= render(cart.line_items) %>
+          
+          <tfoot>
+            <tr class="text-info">
+              <th colspan="2" class="text-right">Total:</th>
+              <td class="price text-center" ><strong><%= number_to_currency(cart.total_price) %></strong></td>
+            </tr>
+            <tr class="text-info text-center">
+                  <td colspan="2"><%= button_to 'Empty cart', cart, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                  <td><%= button_to 'Checkout', new_place_order_path, method: :get, class: "checkout" %></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

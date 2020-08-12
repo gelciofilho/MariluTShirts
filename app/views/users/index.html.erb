@@ -1,0 +1,39 @@
+<div class="container mt-4 mb-4 bg-transparent border border-info">
+  <div class="row justify-content-center">
+    <div class="col-12 mt-4 mb-1">
+
+      <h1 class="text-center text-info"> Users </h1>
+
+      <small class="form-text text-muted mb-4">Date/Time: <%= Date.today.strftime("%d/%m/%Y") %> <%= Time.now.strftime("%H:%M:%S") %></small>
+      
+      <div class="table-responsive">
+        <table class = "table table-hover">
+          <thead>
+            <tr class="text-info">
+              <th scope="col">Username</th>
+              <th scope="col">E-mail</th>
+              <th scope="col" class="text-center">Joined at</th>
+              <th scope="col" class="text-center">Pending orders</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @users.each do |user| %>
+              <tr scope="row">
+                <td class="align-middle"><%= link_to user.username, user %></td>
+                <td class="align-middle"><%= user.email %></td>
+                <td class="align-middle text-center"><%= user.created_at.strftime("%d/%m/%y %H:%M:%S") %></td>
+                <td class="align-middle text-center"><%= link_to user.place_orders.count, user %></td>
+                <td class="align-middle text-center"><%= link_to 'View', user %></td>
+                <td class="align-middle text-center"><%= link_to 'Edit', edit_user_path(user) %></td>
+                <td class="align-middle text-center"><%= link_to 'Delete profile', user_path(user), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+
+      <br/>
+
+    </div>
+  </div>
+</div> 

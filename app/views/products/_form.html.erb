@@ -12,23 +12,23 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
+    <%= form.label :title, class: 'text-info mt-3' %>
+    <%= form.text_field :title, size: 59 %>
   </div>
 
   <div class="field">
-    <%= form.label :description %>
+    <%= form.label :description, class: 'text-info mt-3' %>
     <%= form.text_area :description, rows: 10, cols: 60 %>
   </div>
 
   <div class="field">
-    <%= form.label :image_url %>
-    <%= form.text_field :image_url %>
+    <%= form.label :image_url, "Image", class: 'text-info mt-3' %>
+    <%= form.text_field :image_url, size: 59 %>
   </div>
 
   <div class="field">
-    <%= form.label :price %>
-    <%= form.text_field :price %>
+    <%= form.label :price, class: 'text-info mt-3' %>
+    <%= form.text_field :price, size: 59 %>
   </div>
 
   <div class="actions">

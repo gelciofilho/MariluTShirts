@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class PlaceOrdersControllerTest < ActionDispatch::IntegrationTest
+class OrdersControllerTest < ActionDispatch::IntegrationTest
   setup do
     @place_order = place_orders(:one)
   end
@@ -10,20 +10,30 @@ class PlaceOrdersControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "requires item in cart" do
+    get new_place_order_url
+    assert_redirected_to index_path
+    assert_equal flash[:notice], 'Your cart is empty'
+  end
+
   test "should get new" do
+    post line_items_url, params: { product_id: products(:ruby).id }
+
     get new_place_order_url
     assert_response :success
   end
 
-  test "should create place_order" do
-    assert_difference('PlaceOrder.count') do
-      post place_orders_url, params: { place_order: { address: @place_order.address, email: @place_order.email, name: @place_order.name, pay_type: @place_order.pay_type } }
+  test "should create order" do
+    assert_difference('Place_order.count') do
+      post place_orders_url, params: { place_order: { address: @place_order.address,
+        email: @place_order.email, name: @place_order.name,
+        pay_type: @place_order.pay_type } }
     end
 
-    assert_redirected_to place_order_url(PlaceOrder.last)
+    assert_redirected_to index_url(locale: 'en')
   end
 
-  test "should show place_order" do
+  test "should show order" do
     get place_order_url(@place_order)
     assert_response :success
   end
@@ -33,13 +43,13 @@ class PlaceOrdersControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should update place_order" do
+  test "should update order" do
     patch place_order_url(@place_order), params: { place_order: { address: @place_order.address, email: @place_order.email, name: @place_order.name, pay_type: @place_order.pay_type } }
     assert_redirected_to place_order_url(@place_order)
   end
 
-  test "should destroy place_order" do
-    assert_difference('PlaceOrder.count', -1) do
+  test "should destroy order" do
+    assert_difference('Order.count', -1) do
       delete place_order_url(@place_order)
     end
 

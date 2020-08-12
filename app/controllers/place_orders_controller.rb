@@ -3,12 +3,14 @@ class PlaceOrdersController < ApplicationController
   before_action :set_cart, only: [:new, :create]
   before_action :ensure_cart_isnt_empty, only: :new
   before_action :set_place_order, only: [:show, :edit, :update, :destroy]
+  before_action :require_user
 
   # GET /place_orders
   # GET /place_orders.json
 
   def index
     @place_orders = PlaceOrder.all
+    @total_orders = PlaceOrder.count
   end
 
   # GET /place_orders/1
@@ -30,6 +32,7 @@ class PlaceOrdersController < ApplicationController
   def create
     @place_order = PlaceOrder.new(place_order_params)
     @place_order.add_line_items_from_cart(@cart)
+    @place_order.user = current_user
 
     respond_to do |format|
       if @place_order.save
@@ -69,14 +72,8 @@ class PlaceOrdersController < ApplicationController
     end
   end
 
-  private
 
-    def ensure_cart_isnt_empty
-      if @cart.line_items.empty?
-        redirect_to index_url, notice: 'Your cart is empty'
-      end
-    end
-    
+    private
     # Use callbacks to share common setup or constraints between actions.
     def set_place_order
       @place_order = PlaceOrder.find(params[:id])
@@ -84,6 +81,14 @@ class PlaceOrdersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def place_order_params
-      params.require(:place_order).permit(:name, :address, :email, :pay_type)
+      params.require(:place_order).permit(:id, :name, :address, :email, :pay_type)
+    end
+
+    private
+
+    def ensure_cart_isnt_empty
+      if @cart.line_items.empty?
+        redirect_to index_url, notice: 'Your cart is empty'
+      end
     end
 end
